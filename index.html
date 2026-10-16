@@ -22,7 +22,6 @@
     legend { font-weight: bold; font-size: 12px; padding: 0 6px; text-transform: uppercase; }
     label { display: block; font-weight: bold; margin-top: 8px; margin-bottom: 2px; }
 
-    /* Asterisco de obrigatório */
     .obrigatorio::after {
       content: " *";
       color: #c00;
@@ -67,6 +66,12 @@
     .check-group input[type="checkbox"],
     .check-group input[type="radio"] { width: auto; }
 
+    .check-group.obrigatorio-grupo {
+      border: 1px dashed #c00;
+      padding: 6px;
+      border-radius: 3px;
+    }
+
     .declaracao { font-size: 11px; text-align: justify; margin: 14px 0; }
     .assinaturas { display: flex; gap: 20px; flex-wrap: wrap; margin-top: 24px; }
     .assinaturas > div { flex: 1; min-width: 220px; }
@@ -94,6 +99,7 @@
       fieldset { page-break-inside: avoid; }
       .no-print { display: none; }
       .aviso-obrigatorio { display: none; }
+      .check-group.obrigatorio-grupo { border: none; padding: 0; }
     }
   </style>
 </head>
@@ -210,8 +216,8 @@
           </select>
         </div>
         <div>
-          <label for="cor">Cor:</label>
-          <input type="text" id="cor" name="cor">
+          <label for="cor" class="obrigatorio">Cor:</label>
+          <input type="text" id="cor" name="cor" required>
         </div>
       </div>
 
@@ -247,20 +253,20 @@
 
       <div class="linha">
         <div>
-          <label for="tituloNumero">Título de Eleitor número:</label>
-          <input type="text" id="tituloNumero" name="tituloNumero">
+          <label for="tituloNumero" class="obrigatorio">Título de Eleitor número:</label>
+          <input type="text" id="tituloNumero" name="tituloNumero" required>
         </div>
         <div>
-          <label for="zona">Zona:</label>
-          <input type="text" id="zona" name="zona">
+          <label for="zona" class="obrigatorio">Zona:</label>
+          <input type="text" id="zona" name="zona" required>
         </div>
         <div>
-          <label for="secao">Seção:</label>
-          <input type="text" id="secao" name="secao">
+          <label for="secao" class="obrigatorio">Seção:</label>
+          <input type="text" id="secao" name="secao" required>
         </div>
         <div>
-          <label for="ufTitulo">UF:</label>
-          <input type="text" id="ufTitulo" name="ufTitulo" maxlength="2">
+          <label for="ufTitulo" class="obrigatorio">UF:</label>
+          <input type="text" id="ufTitulo" name="ufTitulo" maxlength="2" required>
         </div>
       </div>
 
@@ -304,12 +310,12 @@
 
       <div class="linha">
         <div>
-          <label for="fatorRh">Fator RH:</label>
-          <input type="text" id="fatorRh" name="fatorRh">
+          <label for="fatorRh" class="obrigatorio">Fator RH:</label>
+          <input type="text" id="fatorRh" name="fatorRh" required>
         </div>
         <div>
-          <label for="tipoSanguineo">Tipo sanguíneo:</label>
-          <input type="text" id="tipoSanguineo" name="tipoSanguineo">
+          <label for="tipoSanguineo" class="obrigatorio">Tipo sanguíneo:</label>
+          <input type="text" id="tipoSanguineo" name="tipoSanguineo" required>
         </div>
       </div>
 
@@ -358,8 +364,8 @@
 
     <!-- GRAU DE INSTRUÇÃO -->
     <fieldset>
-      <legend>Grau de instrução (marcar com X)</legend>
-      <div class="check-group">
+      <legend>Grau de instrução (marcar com X) <span style="color:#c00">*</span></legend>
+      <div class="check-group obrigatorio-grupo" id="grupoInstrucao">
         <label><input type="checkbox" name="instrucao" value="Fundamental"> Ensino fundamental</label>
         <label><input type="checkbox" name="instrucao" value="Medio"> Ensino médio</label>
         <label><input type="checkbox" name="instrucao" value="Superior"> Ensino superior</label>
@@ -367,6 +373,7 @@
         <label><input type="checkbox" name="instrucao" value="Doutorado"> Doutorado</label>
         <label><input type="checkbox" name="instrucao" value="PHD"> PHD</label>
       </div>
+      <p class="obs">Marque pelo menos uma opção.</p>
     </fieldset>
 
     <!-- FORMAÇÃO -->
@@ -606,33 +613,12 @@
     </fieldset>
 
     <div class="no-print" style="text-align:center; margin-top:20px;">
-      <button type="submit" style="padding:10px 24px; font-size:14px; cursor:pointer;">
-        ✅ Validar e imprimir
-      </button>
       <button type="button" onclick="window.print()" style="padding:10px 24px; font-size:14px; cursor:pointer;">
         🖨️ Imprimir / Salvar como PDF
       </button>
     </div>
 
   </form>
-
-  <script>
-    // Validação nativa com feedback amigável
-    document.getElementById('fichaForm').addEventListener('submit', function (e) {
-      e.preventDefault();
-
-      const primeiroInvalido = this.querySelector(':invalid');
-      if (primeiroInvalido) {
-        primeiroInvalido.focus();
-        primeiroInvalido.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        alert('Por favor, preencha todos os campos obrigatórios marcados com * antes de continuar.');
-        return;
-      }
-
-      alert('Todos os campos obrigatórios foram preenchidos com sucesso! Você já pode imprimir ou salvar como PDF.');
-      window.print();
-    });
-  </script>
 
 </body>
 </html>
