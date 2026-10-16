@@ -12,48 +12,14 @@
       margin: 20px;
       line-height: 1.4;
     }
-    .header {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-    .header h1 {
-      font-size: 16px;
-      margin: 4px 0;
-      text-transform: uppercase;
-    }
-    .header h2 {
-      font-size: 14px;
-      margin: 4px 0;
-      text-transform: uppercase;
-    }
-    .header .data {
-      text-align: right;
-      font-weight: bold;
-      margin-top: 10px;
-    }
-    .brasao {
-      width: 90px;
-      height: auto;
-      display: block;
-      margin: 0 auto 10px;
-    }
-    fieldset {
-      border: 1px solid #333;
-      margin-bottom: 14px;
-      padding: 10px;
-    }
-    legend {
-      font-weight: bold;
-      font-size: 12px;
-      padding: 0 6px;
-      text-transform: uppercase;
-    }
-    label {
-      display: block;
-      font-weight: bold;
-      margin-top: 8px;
-      margin-bottom: 2px;
-    }
+    .header { text-align: center; margin-bottom: 20px; }
+    .header h1 { font-size: 16px; margin: 4px 0; text-transform: uppercase; }
+    .header h2 { font-size: 14px; margin: 4px 0; text-transform: uppercase; }
+    .header .data { text-align: right; font-weight: bold; margin-top: 10px; }
+    .brasao { width: 110px; height: auto; display: block; margin: 0 auto 10px; }
+    fieldset { border: 1px solid #333; margin-bottom: 14px; padding: 10px; }
+    legend { font-weight: bold; font-size: 12px; padding: 0 6px; text-transform: uppercase; }
+    label { display: block; font-weight: bold; margin-top: 8px; margin-bottom: 2px; }
     input[type="text"],
     input[type="date"],
     input[type="email"],
@@ -67,25 +33,10 @@
       font-size: 12px;
       font-family: inherit;
     }
-    textarea {
-      resize: vertical;
-      min-height: 50px;
-    }
-    .linha {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-    .linha > div {
-      flex: 1;
-      min-width: 120px;
-    }
-    .check-group {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 14px;
-      margin-top: 6px;
-    }
+    textarea { resize: vertical; min-height: 50px; }
+    .linha { display: flex; gap: 10px; flex-wrap: wrap; }
+    .linha > div { flex: 1; min-width: 120px; }
+    .check-group { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 6px; }
     .check-group label {
       font-weight: normal;
       display: inline-flex;
@@ -93,24 +44,11 @@
       gap: 4px;
       margin: 0;
     }
-    .check-group input[type="checkbox"] {
-      width: auto;
-    }
-    .declaracao {
-      font-size: 11px;
-      text-align: justify;
-      margin: 14px 0;
-    }
-    .assinaturas {
-      display: flex;
-      gap: 20px;
-      flex-wrap: wrap;
-      margin-top: 24px;
-    }
-    .assinaturas > div {
-      flex: 1;
-      min-width: 220px;
-    }
+    .check-group input[type="checkbox"],
+    .check-group input[type="radio"] { width: auto; }
+    .declaracao { font-size: 11px; text-align: justify; margin: 14px 0; }
+    .assinaturas { display: flex; gap: 20px; flex-wrap: wrap; margin-top: 24px; }
+    .assinaturas > div { flex: 1; min-width: 220px; }
     .assinatura-linha {
       border-top: 1px solid #000;
       margin-top: 40px;
@@ -118,10 +56,7 @@
       text-align: center;
       font-size: 11px;
     }
-    .obs {
-      font-size: 10px;
-      color: #444;
-    }
+    .obs { font-size: 10px; color: #444; }
     @media print {
       body { margin: 10mm; }
       fieldset { page-break-inside: avoid; }
@@ -132,7 +67,10 @@
 <body>
 
   <div class="header">
-    <img class="brasao" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Coat_of_arms_of_Brazil.svg/200px-Coat_of_arms_of_Brazil.svg.png" alt="Brasão da República">
+    <!-- Brasão embutido em Base64 (funciona offline) -->
+    <img class="brasao"
+      alt="Brasão da República Federativa do Brasil"
+      src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMjAwIj4KICA8IS0tIEVzdHJlbGEgLS0+CiAgPHBvbHlnb24gcG9pbnRzPSIxMDAsMjAgMTE1LDcwIDE2NSw3MCAxMjUsMTAwIDE0MCwxNTAgMTAwLDEyMCA2MCwxNTAgNzUsMTAwIDM1LDcwIDg1LDcwIiBmaWxsPSIjRkZFQjAwIiBzdHJva2U9IiMwMDY2MDAiIHN0cm9rZS13aWR0aD0iMyIvPgogIDwhLS0gQ2lyY3VsbyBheiAtLT4KICA8Y2lyY2xlIGN4PSIxMDAiIGN5PSI5MCIgcj0iMjgiIGZpbGw9IiMwMDMzOTkiIHN0cm9rZT0iI0ZGRkZGRiIgc3Ryb2tlLXdpZHRoPSIyIi8+CiAgPCEtLSBGYWl4YSAtLT4KICA8cmVjdCB4PSI5NSIgeT0iMTE4IiB3aWR0aD0iMTAiIGhlaWdodD0iNDAiIGZpbGw9IiNGRkZGRkYiIHN0cm9rZT0iIzAwNjYwMCIgc3Ryb2tlLXdpZHRoPSIxLjUiLz4KICA8IS0tIEVzdHJlbGFzIGJyYW5jYXMgLS0+CiAgPGNpcmNsZSBjeD0iMTAwIiBjeT0iNzAiIHI9IjIuNSIgZmlsbD0iI0ZGRkZGRiIvPgogIDxjaXJjbGUgY3g9IjExMCIgY3k9Ijc4IiByPSIyLjUiIGZpbGw9IiNGRkZGRkYiLz4KICA8Y2lyY2xlIGN4PSIxMTIiIGN5PSI5MCIgcj0iMi41IiBmaWxsPSIjRkZGRkZGIi8+CiAgPGNpcmNsZSBjeD0iMTA4IiBjeT0iMTAyIiByPSIyLjUiIGZpbGw9IiNGRkZGRkYiLz4KICA8Y2lyY2xlIGN4PSI5MiIgY3k9IjEwMiIgcj0iMi41IiBmaWxsPSIjRkZGRkZGIi8+CiAgPGNpcmNsZSBjeD0iODgiIGN5PSI5MCIgcj0iMi41IiBmaWxsPSIjRkZGRkZGIi8+CiAgPGNpcmNsZSBjeD0iOTAiIGN5PSI3OCIgcj0iMi41IiBmaWxsPSIjRkZGRkZGIi8+CiAgPCEtLSBSYW1vcyB2ZXJkZXMgLS0+CiAgPHBhdGggZD0iTTUwLDE0MCBRMTAwLDE4MCAxNTAsMTQwIiBmaWxsPSJub25lIiBzdHJva2U9IiMwMDY2MDAiIHN0cm9rZS13aWR0aD0iNiIvPgogIDxwYXRoIGQ9Ik02MCwxNTAgUTEwMCwxODUgMTQwLDE1MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDA4ODAwIiBzdHJva2Utd2lkdGg9IjQiLz4KICA8IS0tIEZhaXhhIGF6dWwgLS0+CiAgPHBhdGggZD0iTTQwLDE3MCBRMTAwLDIwMCAxNjAsMTcwIiBmaWxsPSJub25lIiBzdHJva2U9IiMwMDMzOTkiIHN0cm9rZS13aWR0aD0iNSIvPgo8L3N2Zz4K" />
     <h2>ANEXO I</h2>
     <h1>SERVIÇO PÚBLICO FEDERAL<br>MJSP - POLÍCIA FEDERAL</h1>
     <h2>FICHA CADASTRAL</h2>
@@ -141,27 +79,20 @@
 
   <form>
 
-    <!-- DADOS PESSOAIS -->
     <fieldset>
       <legend>Dados Pessoais</legend>
-
       <label for="nomeCompleto">Nome completo do candidato (sem abreviações):</label>
       <input type="text" id="nomeCompleto" name="nomeCompleto" placeholder="Nome completo sem abreviações">
-
       <label for="outrosNomes">Outros nomes, apelido, alcunha:</label>
       <input type="text" id="outrosNomes" name="outrosNomes" placeholder="Outros nomes, apelido, alcunha">
-
       <label for="prestadora">Nome da prestadora de serviços ao qual o candidato está vinculado:</label>
       <input type="text" id="prestadora" name="prestadora" value="MAIS ESTÁGIO" readonly>
-
       <label for="funcao">Função pretendida:</label>
       <input type="text" id="funcao" name="funcao" value="ESTAGIÁRIO(A)" readonly>
     </fieldset>
 
-    <!-- QUALIFICAÇÃO -->
     <fieldset>
       <legend>Qualificação</legend>
-
       <div class="linha">
         <div>
           <label for="nacionalidade">Nacionalidade:</label>
@@ -172,7 +103,6 @@
           <input type="text" id="naturalidade" name="naturalidade" placeholder="naturalidade">
         </div>
       </div>
-
       <div class="linha">
         <div>
           <label for="dataNasc">Data de nascimento:</label>
@@ -189,13 +119,10 @@
           </select>
         </div>
       </div>
-
       <label for="filiacao1">Filiação (nome do pai):</label>
       <input type="text" id="filiacao1" name="filiacao1" placeholder="Nome do pai">
-
       <label for="filiacao2">Filiação (nome da mãe):</label>
       <input type="text" id="filiacao2" name="filiacao2" placeholder="Nome da mãe">
-
       <div class="linha">
         <div>
           <label for="profissao">Profissão:</label>
@@ -206,7 +133,6 @@
           <input type="text" id="cpf" name="cpf" placeholder="000.000.000-00">
         </div>
       </div>
-
       <div class="linha">
         <div>
           <label for="rg">RG:</label>
@@ -221,7 +147,6 @@
           <input type="text" id="ufRg" name="ufRg" placeholder="UF" maxlength="2">
         </div>
       </div>
-
       <div class="linha">
         <div>
           <label for="estadoCivil">Estado civil:</label>
@@ -240,22 +165,18 @@
           <input type="text" id="cor" name="cor" placeholder="Cor">
         </div>
       </div>
-
       <label for="conjuge">Nome completo e CPF do cônjuge/companheiro(a):</label>
       <input type="text" id="conjuge" name="conjuge" placeholder="Nome completo e CPF">
     </fieldset>
 
-    <!-- DOCUMENTOS -->
     <fieldset>
       <legend>Documentos</legend>
-
       <div class="linha">
         <div>
           <label for="pis">PIS / PASEP número:</label>
           <input type="text" id="pis" name="pis" placeholder="número PIS/PASEP">
         </div>
       </div>
-
       <div class="linha">
         <div>
           <label for="ctNumero">Carteira de trabalho número:</label>
@@ -270,7 +191,6 @@
           <input type="date" id="ctData" name="ctData">
         </div>
       </div>
-
       <div class="linha">
         <div>
           <label for="tituloNumero">Título de Eleitor número:</label>
@@ -289,7 +209,6 @@
           <input type="text" id="ufTitulo" name="ufTitulo" placeholder="UF" maxlength="2">
         </div>
       </div>
-
       <div class="linha">
         <div>
           <label for="milNumero">Situação militar número:</label>
@@ -308,7 +227,6 @@
           <input type="date" id="milData" name="milData">
         </div>
       </div>
-
       <div class="linha">
         <div>
           <label for="cnhNumero">CNH número:</label>
@@ -327,7 +245,6 @@
           <input type="text" id="cnhUf" name="cnhUf" placeholder="UF" maxlength="2">
         </div>
       </div>
-
       <div class="linha">
         <div>
           <label for="fatorRh">Fator RH:</label>
@@ -338,24 +255,18 @@
           <input type="text" id="tipoSanguineo" name="tipoSanguineo" placeholder="tipo">
         </div>
       </div>
-
       <label for="email">E-mail:</label>
       <input type="email" id="email" name="email" placeholder="e-mail">
-
       <label for="passaporte">Passaporte:</label>
       <input type="text" id="passaporte" name="passaporte" placeholder="passaporte">
-
       <label for="redesSociais">Nome de usuário e as redes sociais de que participa:</label>
       <input type="text" id="redesSociais" name="redesSociais" placeholder="nome e rede social">
     </fieldset>
 
-    <!-- RESIDÊNCIA -->
     <fieldset>
       <legend>Dados relativos a locais de residência</legend>
-
       <label for="endereco">Endereço residencial atual:</label>
       <input type="text" id="endereco" name="endereco" placeholder="endereço residencial atual">
-
       <div class="linha">
         <div>
           <label for="telefoneFixo">Telefone fixo c/ DDD:</label>
@@ -366,23 +277,18 @@
           <input type="text" id="telefoneCelular" name="telefoneCelular" placeholder="telefone celular">
         </div>
       </div>
-
       <label for="emergencia">Em caso de urgência ligar para:</label>
       <input type="text" id="emergencia" name="emergencia" placeholder="em caso de emergência">
     </fieldset>
 
-    <!-- TRABALHO -->
     <fieldset>
       <legend>Dados relativos a locais de trabalho</legend>
-
       <label for="trabalhoAtual">Trabalho atual (Função desempenhada, período em que trabalhou e contato):</label>
       <textarea id="trabalhoAtual" name="trabalhoAtual" placeholder="trabalho atual"></textarea>
-
       <label for="trabalhoAnterior">Trabalho anterior (Função desempenhada, período em que trabalhou e contato):</label>
       <textarea id="trabalhoAnterior" name="trabalhoAnterior" placeholder="trabalho anterior"></textarea>
     </fieldset>
 
-    <!-- GRAU DE INSTRUÇÃO -->
     <fieldset>
       <legend>Grau de instrução (marcar com X)</legend>
       <div class="check-group">
@@ -395,16 +301,12 @@
       </div>
     </fieldset>
 
-    <!-- FORMAÇÃO -->
     <fieldset>
       <legend>Formação</legend>
-
       <label for="inst1">1- Nome da instituição:</label>
       <input type="text" id="inst1" name="inst1" placeholder="Nome da instituição">
-
       <label for="inst2">2- Nome da instituição:</label>
       <input type="text" id="inst2" name="inst2" placeholder="Nome da instituição">
-
       <div class="linha">
         <div>
           <label for="municipioUf1">Município/UF:</label>
@@ -415,15 +317,11 @@
           <input type="text" id="bacharel" name="bacharel" placeholder="Bacharel em">
         </div>
       </div>
-
       <label for="dataCurso1">Data em que finalizou o curso:</label>
       <input type="text" id="dataCurso1" name="dataCurso1" placeholder="Data">
-
       <p><strong>Para pós-graduação, mestrado, doutorado e PHD, especificar:</strong></p>
-
       <label for="instPos">1- Nome da instituição:</label>
       <input type="text" id="instPos" name="instPos" placeholder="Nome da instituição">
-
       <div class="linha">
         <div>
           <label for="municipioUfPos">2- Município/UF:</label>
@@ -434,12 +332,10 @@
           <input type="text" id="cursoPos" name="cursoPos" placeholder="Nome do curso">
         </div>
       </div>
-
       <label for="dataCursoPos">4- Data em que finalizou o curso:</label>
       <input type="text" id="dataCursoPos" name="dataCursoPos" placeholder="Data">
     </fieldset>
 
-    <!-- VIDA PREGRESSA -->
     <fieldset>
       <legend>Dados relativos à vida pregressa</legend>
 
@@ -458,18 +354,9 @@
       </div>
       <p class="obs">Em caso de resposta positiva informar:</p>
       <div class="linha">
-        <div>
-          <label for="iplNumero">a) Nº do IPL:</label>
-          <input type="text" id="iplNumero" name="iplNumero">
-        </div>
-        <div>
-          <label for="iplOrgao">b) Órgão onde foi instaurado:</label>
-          <input type="text" id="iplOrgao" name="iplOrgao">
-        </div>
-        <div>
-          <label for="iplData">c) Data de instauração:</label>
-          <input type="date" id="iplData" name="iplData">
-        </div>
+        <div><label for="iplNumero">a) Nº do IPL:</label><input type="text" id="iplNumero" name="iplNumero"></div>
+        <div><label for="iplOrgao">b) Órgão onde foi instaurado:</label><input type="text" id="iplOrgao" name="iplOrgao"></div>
+        <div><label for="iplData">c) Data de instauração:</label><input type="date" id="iplData" name="iplData"></div>
       </div>
       <label for="iplTipificacao">d) Tipificação (artigo(s) e lei(s)):</label>
       <textarea id="iplTipificacao" name="iplTipificacao"></textarea>
@@ -485,18 +372,9 @@
       </div>
       <p class="obs">Em caso de resposta positiva informar:</p>
       <div class="linha">
-        <div>
-          <label for="pcNumero">a) Nº do processo:</label>
-          <input type="text" id="pcNumero" name="pcNumero">
-        </div>
-        <div>
-          <label for="pcVara">b) Vara de distribuição:</label>
-          <input type="text" id="pcVara" name="pcVara">
-        </div>
-        <div>
-          <label for="pcData">c) Data de autuação:</label>
-          <input type="date" id="pcData" name="pcData">
-        </div>
+        <div><label for="pcNumero">a) Nº do processo:</label><input type="text" id="pcNumero" name="pcNumero"></div>
+        <div><label for="pcVara">b) Vara de distribuição:</label><input type="text" id="pcVara" name="pcVara"></div>
+        <div><label for="pcData">c) Data de autuação:</label><input type="date" id="pcData" name="pcData"></div>
       </div>
       <label for="pcObjeto">d) Objeto da petição (artigo(s) e lei(s)):</label>
       <textarea id="pcObjeto" name="pcObjeto"></textarea>
@@ -512,18 +390,9 @@
       </div>
       <p class="obs">Em caso de resposta positiva informar:</p>
       <div class="linha">
-        <div>
-          <label for="acNumero">a) Nº do processo:</label>
-          <input type="text" id="acNumero" name="acNumero">
-        </div>
-        <div>
-          <label for="acVara">b) Vara de distribuição:</label>
-          <input type="text" id="acVara" name="acVara">
-        </div>
-        <div>
-          <label for="acData">c) Data de autuação:</label>
-          <input type="date" id="acData" name="acData">
-        </div>
+        <div><label for="acNumero">a) Nº do processo:</label><input type="text" id="acNumero" name="acNumero"></div>
+        <div><label for="acVara">b) Vara de distribuição:</label><input type="text" id="acVara" name="acVara"></div>
+        <div><label for="acData">c) Data de autuação:</label><input type="date" id="acData" name="acData"></div>
       </div>
       <label for="acFase">d) Fase atual:</label>
       <input type="text" id="acFase" name="acFase">
@@ -537,18 +406,9 @@
       </div>
       <p class="obs">Em caso de resposta positiva informar:</p>
       <div class="linha">
-        <div>
-          <label for="tcoNumero">a) Nº do TCO:</label>
-          <input type="text" id="tcoNumero" name="tcoNumero">
-        </div>
-        <div>
-          <label for="tcoOrgao">b) Órgão onde foi instaurado:</label>
-          <input type="text" id="tcoOrgao" name="tcoOrgao">
-        </div>
-        <div>
-          <label for="tcoData">c) Data de instauração:</label>
-          <input type="date" id="tcoData" name="tcoData">
-        </div>
+        <div><label for="tcoNumero">a) Nº do TCO:</label><input type="text" id="tcoNumero" name="tcoNumero"></div>
+        <div><label for="tcoOrgao">b) Órgão onde foi instaurado:</label><input type="text" id="tcoOrgao" name="tcoOrgao"></div>
+        <div><label for="tcoData">c) Data de instauração:</label><input type="date" id="tcoData" name="tcoData"></div>
       </div>
       <label for="tcoTipificacao">d) Tipificação (artigo(s) e lei(s)):</label>
       <textarea id="tcoTipificacao" name="tcoTipificacao"></textarea>
@@ -564,18 +424,9 @@
       </div>
       <p class="obs">Em caso de resposta positiva informar:</p>
       <div class="linha">
-        <div>
-          <label for="l9099Numero">a) Nº do processo:</label>
-          <input type="text" id="l9099Numero" name="l9099Numero">
-        </div>
-        <div>
-          <label for="l9099Juizado">b) Juizado:</label>
-          <input type="text" id="l9099Juizado" name="l9099Juizado">
-        </div>
-        <div>
-          <label for="l9099Data">c) Data de instauração:</label>
-          <input type="date" id="l9099Data" name="l9099Data">
-        </div>
+        <div><label for="l9099Numero">a) Nº do processo:</label><input type="text" id="l9099Numero" name="l9099Numero"></div>
+        <div><label for="l9099Juizado">b) Juizado:</label><input type="text" id="l9099Juizado" name="l9099Juizado"></div>
+        <div><label for="l9099Data">c) Data de instauração:</label><input type="date" id="l9099Data" name="l9099Data"></div>
       </div>
       <label for="l9099Tipificacao">d) Tipificação (artigo(s) e lei(s)):</label>
       <textarea id="l9099Tipificacao" name="l9099Tipificacao"></textarea>
@@ -589,32 +440,14 @@
       </div>
       <p class="obs">Em caso de resposta positiva informar:</p>
       <div class="linha">
-        <div>
-          <label for="padTipo">a) Tipo de procedimento:</label>
-          <input type="text" id="padTipo" name="padTipo">
-        </div>
-        <div>
-          <label for="padNumero">b) Nº do procedimento:</label>
-          <input type="text" id="padNumero" name="padNumero">
-        </div>
-        <div>
-          <label for="padOrgao">c) Órgão instaurador:</label>
-          <input type="text" id="padOrgao" name="padOrgao">
-        </div>
+        <div><label for="padTipo">a) Tipo de procedimento:</label><input type="text" id="padTipo" name="padTipo"></div>
+        <div><label for="padNumero">b) Nº do procedimento:</label><input type="text" id="padNumero" name="padNumero"></div>
+        <div><label for="padOrgao">c) Órgão instaurador:</label><input type="text" id="padOrgao" name="padOrgao"></div>
       </div>
       <div class="linha">
-        <div>
-          <label for="padData">d) Data de instauração:</label>
-          <input type="date" id="padData" name="padData">
-        </div>
-        <div>
-          <label for="padResultado">e) Resultado do procedimento:</label>
-          <input type="text" id="padResultado" name="padResultado">
-        </div>
-        <div>
-          <label for="padFase">f) Fase atual:</label>
-          <input type="text" id="padFase" name="padFase">
-        </div>
+        <div><label for="padData">d) Data de instauração:</label><input type="date" id="padData" name="padData"></div>
+        <div><label for="padResultado">e) Resultado do procedimento:</label><input type="text" id="padResultado" name="padResultado"></div>
+        <div><label for="padFase">f) Fase atual:</label><input type="text" id="padFase" name="padFase"></div>
       </div>
       <label for="padFatos">g) Fatos que motivaram a instauração do procedimento (breve histórico):</label>
       <textarea id="padFatos" name="padFatos"></textarea>
@@ -644,7 +477,6 @@
       <input type="text" id="viciosQuais" name="viciosQuais">
     </fieldset>
 
-    <!-- DECLARAÇÃO -->
     <fieldset>
       <legend>Declaração</legend>
       <p class="declaracao">
@@ -660,12 +492,8 @@
         Autorizo a consulta em bancos de dados disponíveis pela Polícia Federal, assim como outras fontes ou meios de pesquisa, para eventual verificação das informações constantes nesse documento.
       </p>
 
-      <div class="linha">
-        <div>
-          <label for="localData">Local / UF – Data do preenchimento:</label>
-          <input type="text" id="localData" name="localData" placeholder="Local / UF – Data">
-        </div>
-      </div>
+      <label for="localData">Local / UF – Data do preenchimento:</label>
+      <input type="text" id="localData" name="localData" placeholder="Local / UF – Data">
 
       <div class="assinaturas">
         <div>
