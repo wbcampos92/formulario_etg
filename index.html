@@ -17,9 +17,18 @@
     .header h2 { font-size: 14px; margin: 4px 0; text-transform: uppercase; }
     .header .data { text-align: right; font-weight: bold; margin-top: 10px; }
     .brasao { width: 140px; height: auto; display: block; margin: 0 auto 10px; }
+
     fieldset { border: 1px solid #333; margin-bottom: 14px; padding: 10px; }
     legend { font-weight: bold; font-size: 12px; padding: 0 6px; text-transform: uppercase; }
     label { display: block; font-weight: bold; margin-top: 8px; margin-bottom: 2px; }
+
+    /* Asterisco de obrigatório */
+    .obrigatorio::after {
+      content: " *";
+      color: #c00;
+      font-weight: bold;
+    }
+
     input[type="text"],
     input[type="date"],
     input[type="email"],
@@ -33,7 +42,18 @@
       font-size: 12px;
       font-family: inherit;
     }
+    input:required:invalid,
+    select:required:invalid,
+    textarea:required:invalid {
+      border-color: #c00;
+    }
+    input:required:valid,
+    select:required:valid,
+    textarea:required:valid {
+      border-color: #2a7a2a;
+    }
     textarea { resize: vertical; min-height: 50px; }
+
     .linha { display: flex; gap: 10px; flex-wrap: wrap; }
     .linha > div { flex: 1; min-width: 120px; }
     .check-group { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 6px; }
@@ -46,6 +66,7 @@
     }
     .check-group input[type="checkbox"],
     .check-group input[type="radio"] { width: auto; }
+
     .declaracao { font-size: 11px; text-align: justify; margin: 14px 0; }
     .assinaturas { display: flex; gap: 20px; flex-wrap: wrap; margin-top: 24px; }
     .assinaturas > div { flex: 1; min-width: 220px; }
@@ -57,17 +78,28 @@
       font-size: 11px;
     }
     .obs { font-size: 10px; color: #444; }
+
+    .aviso-obrigatorio {
+      background: #fff3cd;
+      border: 1px solid #ffe08a;
+      padding: 6px 10px;
+      margin-bottom: 12px;
+      font-size: 11px;
+      border-radius: 3px;
+    }
+    .aviso-obrigatorio strong { color: #c00; }
+
     @media print {
       body { margin: 10mm; }
       fieldset { page-break-inside: avoid; }
       .no-print { display: none; }
+      .aviso-obrigatorio { display: none; }
     }
   </style>
 </head>
 <body>
 
   <div class="header">
-    <!-- Brasão hospedado no GitHub (link raw) -->
     <img class="brasao"
          alt="Brasão da República Federativa do Brasil"
          src="https://raw.githubusercontent.com/wbcampos92/formulario_etg/main/Coat_of_arms_of_Brazil.svg.webp">
@@ -77,40 +109,52 @@
     <div class="data">16/10/2026</div>
   </div>
 
-  <form>
+  <div class="aviso-obrigatorio no-print">
+    Os campos marcados com <strong>*</strong> são de preenchimento obrigatório.
+  </div>
 
+  <form id="fichaForm" novalidate>
+
+    <!-- DADOS PESSOAIS -->
     <fieldset>
       <legend>Dados Pessoais</legend>
-      <label for="nomeCompleto">Nome completo do candidato (sem abreviações):</label>
-      <input type="text" id="nomeCompleto" name="nomeCompleto" placeholder="Nome completo sem abreviações">
+
+      <label for="nomeCompleto" class="obrigatorio">Nome completo do candidato (sem abreviações):</label>
+      <input type="text" id="nomeCompleto" name="nomeCompleto" required>
+
       <label for="outrosNomes">Outros nomes, apelido, alcunha:</label>
-      <input type="text" id="outrosNomes" name="outrosNomes" placeholder="Outros nomes, apelido, alcunha">
+      <input type="text" id="outrosNomes" name="outrosNomes">
+
       <label for="prestadora">Nome da prestadora de serviços ao qual o candidato está vinculado:</label>
       <input type="text" id="prestadora" name="prestadora" value="MAIS ESTÁGIO" readonly>
+
       <label for="funcao">Função pretendida:</label>
       <input type="text" id="funcao" name="funcao" value="ESTAGIÁRIO(A)" readonly>
     </fieldset>
 
+    <!-- QUALIFICAÇÃO -->
     <fieldset>
       <legend>Qualificação</legend>
+
       <div class="linha">
         <div>
-          <label for="nacionalidade">Nacionalidade:</label>
-          <input type="text" id="nacionalidade" name="nacionalidade" placeholder="nacionalidade">
+          <label for="nacionalidade" class="obrigatorio">Nacionalidade:</label>
+          <input type="text" id="nacionalidade" name="nacionalidade" required>
         </div>
         <div>
-          <label for="naturalidade">Naturalidade:</label>
-          <input type="text" id="naturalidade" name="naturalidade" placeholder="naturalidade">
+          <label for="naturalidade" class="obrigatorio">Naturalidade:</label>
+          <input type="text" id="naturalidade" name="naturalidade" required>
         </div>
       </div>
+
       <div class="linha">
         <div>
-          <label for="dataNasc">Data de nascimento:</label>
-          <input type="date" id="dataNasc" name="dataNasc">
+          <label for="dataNasc" class="obrigatorio">Data de nascimento:</label>
+          <input type="date" id="dataNasc" name="dataNasc" required>
         </div>
         <div>
-          <label for="sexo">Sexo:</label>
-          <select id="sexo" name="sexo">
+          <label for="sexo" class="obrigatorio">Sexo:</label>
+          <select id="sexo" name="sexo" required>
             <option value="">Escolher um item</option>
             <option>Masculino</option>
             <option>Feminino</option>
@@ -119,38 +163,43 @@
           </select>
         </div>
       </div>
-      <label for="filiacao1">Filiação (nome do pai):</label>
-      <input type="text" id="filiacao1" name="filiacao1" placeholder="Nome do pai">
-      <label for="filiacao2">Filiação (nome da mãe):</label>
-      <input type="text" id="filiacao2" name="filiacao2" placeholder="Nome da mãe">
+
+      <label for="filiacao1" class="obrigatorio">Filiação (nome do pai):</label>
+      <input type="text" id="filiacao1" name="filiacao1" required>
+
+      <label for="filiacao2" class="obrigatorio">Filiação (nome da mãe):</label>
+      <input type="text" id="filiacao2" name="filiacao2" required>
+
       <div class="linha">
         <div>
           <label for="profissao">Profissão:</label>
-          <input type="text" id="profissao" name="profissao" placeholder="profissão">
+          <input type="text" id="profissao" name="profissao">
         </div>
         <div>
-          <label for="cpf">CPF:</label>
-          <input type="text" id="cpf" name="cpf" placeholder="000.000.000-00">
-        </div>
-      </div>
-      <div class="linha">
-        <div>
-          <label for="rg">RG:</label>
-          <input type="text" id="rg" name="rg" placeholder="número RG">
-        </div>
-        <div>
-          <label for="orgaoExp">Órgão Expedidor:</label>
-          <input type="text" id="orgaoExp" name="orgaoExp" placeholder="órgão expedidor">
-        </div>
-        <div>
-          <label for="ufRg">UF:</label>
-          <input type="text" id="ufRg" name="ufRg" placeholder="UF" maxlength="2">
+          <label for="cpf" class="obrigatorio">CPF:</label>
+          <input type="text" id="cpf" name="cpf" required placeholder="000.000.000-00">
         </div>
       </div>
+
       <div class="linha">
         <div>
-          <label for="estadoCivil">Estado civil:</label>
-          <select id="estadoCivil" name="estadoCivil">
+          <label for="rg" class="obrigatorio">RG:</label>
+          <input type="text" id="rg" name="rg" required>
+        </div>
+        <div>
+          <label for="orgaoExp" class="obrigatorio">Órgão Expedidor:</label>
+          <input type="text" id="orgaoExp" name="orgaoExp" required>
+        </div>
+        <div>
+          <label for="ufRg" class="obrigatorio">UF:</label>
+          <input type="text" id="ufRg" name="ufRg" maxlength="2" required>
+        </div>
+      </div>
+
+      <div class="linha">
+        <div>
+          <label for="estadoCivil" class="obrigatorio">Estado civil:</label>
+          <select id="estadoCivil" name="estadoCivil" required>
             <option value="">Selecione</option>
             <option>Solteiro(a)</option>
             <option>Casado(a)</option>
@@ -162,75 +211,82 @@
         </div>
         <div>
           <label for="cor">Cor:</label>
-          <input type="text" id="cor" name="cor" placeholder="Cor">
+          <input type="text" id="cor" name="cor">
         </div>
       </div>
+
       <label for="conjuge">Nome completo e CPF do cônjuge/companheiro(a):</label>
-      <input type="text" id="conjuge" name="conjuge" placeholder="Nome completo e CPF">
+      <input type="text" id="conjuge" name="conjuge">
     </fieldset>
 
+    <!-- DOCUMENTOS -->
     <fieldset>
       <legend>Documentos</legend>
+
       <div class="linha">
         <div>
           <label for="pis">PIS / PASEP número:</label>
-          <input type="text" id="pis" name="pis" placeholder="número PIS/PASEP">
+          <input type="text" id="pis" name="pis">
         </div>
       </div>
+
       <div class="linha">
         <div>
           <label for="ctNumero">Carteira de trabalho número:</label>
-          <input type="text" id="ctNumero" name="ctNumero" placeholder="número">
+          <input type="text" id="ctNumero" name="ctNumero">
         </div>
         <div>
           <label for="ctSerie">Série:</label>
-          <input type="text" id="ctSerie" name="ctSerie" placeholder="série">
+          <input type="text" id="ctSerie" name="ctSerie">
         </div>
         <div>
           <label for="ctData">Data de expedição:</label>
           <input type="date" id="ctData" name="ctData">
         </div>
       </div>
+
       <div class="linha">
         <div>
           <label for="tituloNumero">Título de Eleitor número:</label>
-          <input type="text" id="tituloNumero" name="tituloNumero" placeholder="número título de eleitor">
+          <input type="text" id="tituloNumero" name="tituloNumero">
         </div>
         <div>
           <label for="zona">Zona:</label>
-          <input type="text" id="zona" name="zona" placeholder="zona">
+          <input type="text" id="zona" name="zona">
         </div>
         <div>
           <label for="secao">Seção:</label>
-          <input type="text" id="secao" name="secao" placeholder="seção">
+          <input type="text" id="secao" name="secao">
         </div>
         <div>
           <label for="ufTitulo">UF:</label>
-          <input type="text" id="ufTitulo" name="ufTitulo" placeholder="UF" maxlength="2">
+          <input type="text" id="ufTitulo" name="ufTitulo" maxlength="2">
         </div>
       </div>
+
       <div class="linha">
         <div>
           <label for="milNumero">Situação militar número:</label>
-          <input type="text" id="milNumero" name="milNumero" placeholder="número">
+          <input type="text" id="milNumero" name="milNumero">
         </div>
         <div>
           <label for="milExpedidor">Expedidor:</label>
-          <input type="text" id="milExpedidor" name="milExpedidor" placeholder="expedidor">
+          <input type="text" id="milExpedidor" name="milExpedidor">
         </div>
         <div>
           <label for="milUf">UF:</label>
-          <input type="text" id="milUf" name="milUf" placeholder="UF" maxlength="2">
+          <input type="text" id="milUf" name="milUf" maxlength="2">
         </div>
         <div>
           <label for="milData">Data:</label>
           <input type="date" id="milData" name="milData">
         </div>
       </div>
+
       <div class="linha">
         <div>
           <label for="cnhNumero">CNH número:</label>
-          <input type="text" id="cnhNumero" name="cnhNumero" placeholder="número">
+          <input type="text" id="cnhNumero" name="cnhNumero">
         </div>
         <div>
           <label for="cnhValidade">Data Validade:</label>
@@ -238,57 +294,69 @@
         </div>
         <div>
           <label for="cnhCategoria">Categoria:</label>
-          <input type="text" id="cnhCategoria" name="cnhCategoria" placeholder="categoria">
+          <input type="text" id="cnhCategoria" name="cnhCategoria">
         </div>
         <div>
           <label for="cnhUf">UF:</label>
-          <input type="text" id="cnhUf" name="cnhUf" placeholder="UF" maxlength="2">
+          <input type="text" id="cnhUf" name="cnhUf" maxlength="2">
         </div>
       </div>
+
       <div class="linha">
         <div>
           <label for="fatorRh">Fator RH:</label>
-          <input type="text" id="fatorRh" name="fatorRh" placeholder="fator RH">
+          <input type="text" id="fatorRh" name="fatorRh">
         </div>
         <div>
           <label for="tipoSanguineo">Tipo sanguíneo:</label>
-          <input type="text" id="tipoSanguineo" name="tipoSanguineo" placeholder="tipo">
+          <input type="text" id="tipoSanguineo" name="tipoSanguineo">
         </div>
       </div>
-      <label for="email">E-mail:</label>
-      <input type="email" id="email" name="email" placeholder="e-mail">
+
+      <label for="email" class="obrigatorio">E-mail:</label>
+      <input type="email" id="email" name="email" required>
+
       <label for="passaporte">Passaporte:</label>
-      <input type="text" id="passaporte" name="passaporte" placeholder="passaporte">
+      <input type="text" id="passaporte" name="passaporte">
+
       <label for="redesSociais">Nome de usuário e as redes sociais de que participa:</label>
-      <input type="text" id="redesSociais" name="redesSociais" placeholder="nome e rede social">
+      <input type="text" id="redesSociais" name="redesSociais">
     </fieldset>
 
+    <!-- RESIDÊNCIA -->
     <fieldset>
       <legend>Dados relativos a locais de residência</legend>
-      <label for="endereco">Endereço residencial atual:</label>
-      <input type="text" id="endereco" name="endereco" placeholder="endereço residencial atual">
+
+      <label for="endereco" class="obrigatorio">Endereço residencial atual:</label>
+      <input type="text" id="endereco" name="endereco" required>
+
       <div class="linha">
         <div>
           <label for="telefoneFixo">Telefone fixo c/ DDD:</label>
-          <input type="text" id="telefoneFixo" name="telefoneFixo" placeholder="telefone fixo">
+          <input type="text" id="telefoneFixo" name="telefoneFixo">
         </div>
         <div>
-          <label for="telefoneCelular">Telefone celular c/ DDD:</label>
-          <input type="text" id="telefoneCelular" name="telefoneCelular" placeholder="telefone celular">
+          <label for="telefoneCelular" class="obrigatorio">Telefone celular c/ DDD:</label>
+          <input type="text" id="telefoneCelular" name="telefoneCelular" required>
         </div>
       </div>
-      <label for="emergencia">Em caso de urgência ligar para:</label>
-      <input type="text" id="emergencia" name="emergencia" placeholder="em caso de emergência">
+
+      <label for="emergencia" class="obrigatorio">Em caso de urgência ligar para:</label>
+      <input type="text" id="emergencia" name="emergencia" required>
     </fieldset>
 
+    <!-- TRABALHO -->
     <fieldset>
       <legend>Dados relativos a locais de trabalho</legend>
+
       <label for="trabalhoAtual">Trabalho atual (Função desempenhada, período em que trabalhou e contato):</label>
-      <textarea id="trabalhoAtual" name="trabalhoAtual" placeholder="trabalho atual"></textarea>
+      <textarea id="trabalhoAtual" name="trabalhoAtual"></textarea>
+
       <label for="trabalhoAnterior">Trabalho anterior (Função desempenhada, período em que trabalhou e contato):</label>
-      <textarea id="trabalhoAnterior" name="trabalhoAnterior" placeholder="trabalho anterior"></textarea>
+      <textarea id="trabalhoAnterior" name="trabalhoAnterior"></textarea>
     </fieldset>
 
+    <!-- GRAU DE INSTRUÇÃO -->
     <fieldset>
       <legend>Grau de instrução (marcar com X)</legend>
       <div class="check-group">
@@ -301,56 +369,66 @@
       </div>
     </fieldset>
 
+    <!-- FORMAÇÃO -->
     <fieldset>
       <legend>Formação</legend>
+
       <label for="inst1">1- Nome da instituição:</label>
-      <input type="text" id="inst1" name="inst1" placeholder="Nome da instituição">
+      <input type="text" id="inst1" name="inst1">
+
       <label for="inst2">2- Nome da instituição:</label>
-      <input type="text" id="inst2" name="inst2" placeholder="Nome da instituição">
+      <input type="text" id="inst2" name="inst2">
+
       <div class="linha">
         <div>
           <label for="municipioUf1">Município/UF:</label>
-          <input type="text" id="municipioUf1" name="municipioUf1" placeholder="Município/UF">
+          <input type="text" id="municipioUf1" name="municipioUf1">
         </div>
         <div>
           <label for="bacharel">Bacharel em:</label>
-          <input type="text" id="bacharel" name="bacharel" placeholder="Bacharel em">
+          <input type="text" id="bacharel" name="bacharel">
         </div>
       </div>
+
       <label for="dataCurso1">Data em que finalizou o curso:</label>
-      <input type="text" id="dataCurso1" name="dataCurso1" placeholder="Data">
+      <input type="text" id="dataCurso1" name="dataCurso1">
+
       <p><strong>Para pós-graduação, mestrado, doutorado e PHD, especificar:</strong></p>
+
       <label for="instPos">1- Nome da instituição:</label>
-      <input type="text" id="instPos" name="instPos" placeholder="Nome da instituição">
+      <input type="text" id="instPos" name="instPos">
+
       <div class="linha">
         <div>
           <label for="municipioUfPos">2- Município/UF:</label>
-          <input type="text" id="municipioUfPos" name="municipioUfPos" placeholder="Município/UF">
+          <input type="text" id="municipioUfPos" name="municipioUfPos">
         </div>
         <div>
           <label for="cursoPos">3- Nome do curso:</label>
-          <input type="text" id="cursoPos" name="cursoPos" placeholder="Nome do curso">
+          <input type="text" id="cursoPos" name="cursoPos">
         </div>
       </div>
+
       <label for="dataCursoPos">4- Data em que finalizou o curso:</label>
-      <input type="text" id="dataCursoPos" name="dataCursoPos" placeholder="Data">
+      <input type="text" id="dataCursoPos" name="dataCursoPos">
     </fieldset>
 
+    <!-- VIDA PREGRESSA -->
     <fieldset>
       <legend>Dados relativos à vida pregressa</legend>
 
-      <p><strong>1- Já foi preso ou detido?</strong></p>
+      <p><strong>1- Já foi preso ou detido? <span style="color:#c00">*</span></strong></p>
       <div class="check-group">
-        <label><input type="radio" name="preso" value="SIM"> SIM</label>
-        <label><input type="radio" name="preso" value="NAO"> NÃO</label>
+        <label><input type="radio" name="preso" value="SIM" required> SIM</label>
+        <label><input type="radio" name="preso" value="NAO" required> NÃO</label>
       </div>
       <label for="presoDetalhes">Se SIM, explicar as circunstâncias que levaram a sua ocorrência:</label>
       <textarea id="presoDetalhes" name="presoDetalhes"></textarea>
 
-      <p><strong>2- Responde ou respondeu a inquérito policial (IPL) Justiça Militar, Estadual ou Federal?</strong></p>
+      <p><strong>2- Responde ou respondeu a inquérito policial (IPL) Justiça Militar, Estadual ou Federal? <span style="color:#c00">*</span></strong></p>
       <div class="check-group">
-        <label><input type="radio" name="ipl" value="SIM"> SIM</label>
-        <label><input type="radio" name="ipl" value="NAO"> NÃO</label>
+        <label><input type="radio" name="ipl" value="SIM" required> SIM</label>
+        <label><input type="radio" name="ipl" value="NAO" required> NÃO</label>
       </div>
       <p class="obs">Em caso de resposta positiva informar:</p>
       <div class="linha">
@@ -365,10 +443,10 @@
       <label for="iplFatos">f) Fatos que motivaram a instauração do IPL (breve histórico):</label>
       <textarea id="iplFatos" name="iplFatos"></textarea>
 
-      <p><strong>3- Responde ou respondeu a processo criminal na Justiça Federal, Estadual, Distrital ou Eleitoral?</strong></p>
+      <p><strong>3- Responde ou respondeu a processo criminal na Justiça Federal, Estadual, Distrital ou Eleitoral? <span style="color:#c00">*</span></strong></p>
       <div class="check-group">
-        <label><input type="radio" name="processoCriminal" value="SIM"> SIM</label>
-        <label><input type="radio" name="processoCriminal" value="NAO"> NÃO</label>
+        <label><input type="radio" name="processoCriminal" value="SIM" required> SIM</label>
+        <label><input type="radio" name="processoCriminal" value="NAO" required> NÃO</label>
       </div>
       <p class="obs">Em caso de resposta positiva informar:</p>
       <div class="linha">
@@ -383,10 +461,10 @@
       <label for="pcFatos">f) Fatos que motivaram a instauração do IPL (breve histórico):</label>
       <textarea id="pcFatos" name="pcFatos"></textarea>
 
-      <p><strong>4- Responde ou respondeu à ação cível?</strong></p>
+      <p><strong>4- Responde ou respondeu à ação cível? <span style="color:#c00">*</span></strong></p>
       <div class="check-group">
-        <label><input type="radio" name="acaoCivel" value="SIM"> SIM</label>
-        <label><input type="radio" name="acaoCivel" value="NAO"> NÃO</label>
+        <label><input type="radio" name="acaoCivel" value="SIM" required> SIM</label>
+        <label><input type="radio" name="acaoCivel" value="NAO" required> NÃO</label>
       </div>
       <p class="obs">Em caso de resposta positiva informar:</p>
       <div class="linha">
@@ -399,10 +477,10 @@
       <label for="acFatos">e) Fatos motivadores (breve histórico):</label>
       <textarea id="acFatos" name="acFatos"></textarea>
 
-      <p><strong>5- Responde ou respondeu a Termo Circunstanciado de Ocorrência?</strong></p>
+      <p><strong>5- Responde ou respondeu a Termo Circunstanciado de Ocorrência? <span style="color:#c00">*</span></strong></p>
       <div class="check-group">
-        <label><input type="radio" name="tco" value="SIM"> SIM</label>
-        <label><input type="radio" name="tco" value="NAO"> NÃO</label>
+        <label><input type="radio" name="tco" value="SIM" required> SIM</label>
+        <label><input type="radio" name="tco" value="NAO" required> NÃO</label>
       </div>
       <p class="obs">Em caso de resposta positiva informar:</p>
       <div class="linha">
@@ -417,10 +495,10 @@
       <label for="tcoFatos">f) Fatos que motivaram a instauração do TCO (breve histórico):</label>
       <textarea id="tcoFatos" name="tcoFatos"></textarea>
 
-      <p><strong>6- Foi beneficiado pela Lei 9.099/95 e/ou Lei 10.259/01 (infração penal de menor potencial ofensivo)?</strong></p>
+      <p><strong>6- Foi beneficiado pela Lei 9.099/95 e/ou Lei 10.259/01 (infração penal de menor potencial ofensivo)? <span style="color:#c00">*</span></strong></p>
       <div class="check-group">
-        <label><input type="radio" name="lei9099" value="SIM"> SIM</label>
-        <label><input type="radio" name="lei9099" value="NAO"> NÃO</label>
+        <label><input type="radio" name="lei9099" value="SIM" required> SIM</label>
+        <label><input type="radio" name="lei9099" value="NAO" required> NÃO</label>
       </div>
       <p class="obs">Em caso de resposta positiva informar:</p>
       <div class="linha">
@@ -433,10 +511,10 @@
       <label for="l9099Fatos">e) Fatos que motivaram a instauração do TCO (breve histórico):</label>
       <textarea id="l9099Fatos" name="l9099Fatos"></textarea>
 
-      <p><strong>7- Responde ou respondeu à sindicância disciplinar, inquérito administrativo ou processo administrativo disciplinar (PAD)?</strong></p>
+      <p><strong>7- Responde ou respondeu à sindicância disciplinar, inquérito administrativo ou processo administrativo disciplinar (PAD)? <span style="color:#c00">*</span></strong></p>
       <div class="check-group">
-        <label><input type="radio" name="pad" value="SIM"> SIM</label>
-        <label><input type="radio" name="pad" value="NAO"> NÃO</label>
+        <label><input type="radio" name="pad" value="SIM" required> SIM</label>
+        <label><input type="radio" name="pad" value="NAO" required> NÃO</label>
       </div>
       <p class="obs">Em caso de resposta positiva informar:</p>
       <div class="linha">
@@ -452,31 +530,32 @@
       <label for="padFatos">g) Fatos que motivaram a instauração do procedimento (breve histórico):</label>
       <textarea id="padFatos" name="padFatos"></textarea>
 
-      <p><strong>8- Já foi demitido por justa causa nos termos da legislação trabalhista?</strong></p>
+      <p><strong>8- Já foi demitido por justa causa nos termos da legislação trabalhista? <span style="color:#c00">*</span></strong></p>
       <div class="check-group">
-        <label><input type="radio" name="demitido" value="SIM"> SIM</label>
-        <label><input type="radio" name="demitido" value="NAO"> NÃO</label>
+        <label><input type="radio" name="demitido" value="SIM" required> SIM</label>
+        <label><input type="radio" name="demitido" value="NAO" required> NÃO</label>
       </div>
       <label for="demitidoFatos">a) Se positivo esclarecer os fatos motivadores:</label>
       <textarea id="demitidoFatos" name="demitidoFatos"></textarea>
 
-      <p><strong>9- Já foi demitido de cargo público ou destituído de cargo em comissão no exercício da função pública, em qualquer órgão da administração direta ou indireta, nas esferas federal, estadual, distrital e municipal?</strong></p>
+      <p><strong>9- Já foi demitido de cargo público ou destituído de cargo em comissão no exercício da função pública, em qualquer órgão da administração direta ou indireta, nas esferas federal, estadual, distrital e municipal? <span style="color:#c00">*</span></strong></p>
       <div class="check-group">
-        <label><input type="radio" name="demitidoCargo" value="SIM"> SIM</label>
-        <label><input type="radio" name="demitidoCargo" value="NAO"> NÃO</label>
+        <label><input type="radio" name="demitidoCargo" value="SIM" required> SIM</label>
+        <label><input type="radio" name="demitidoCargo" value="NAO" required> NÃO</label>
       </div>
       <label for="demitidoCargoFatos">a) Se positivo esclarecer os fatos motivadores:</label>
       <textarea id="demitidoCargoFatos" name="demitidoCargoFatos"></textarea>
 
-      <p><strong>10- Possui vícios? (cigarro, bebidas alcoólicas, jogos, etc.)</strong></p>
+      <p><strong>10- Possui vícios? (cigarro, bebidas alcoólicas, jogos, etc.) <span style="color:#c00">*</span></strong></p>
       <div class="check-group">
-        <label><input type="radio" name="vicios" value="SIM"> SIM</label>
-        <label><input type="radio" name="vicios" value="NAO"> NÃO</label>
+        <label><input type="radio" name="vicios" value="SIM" required> SIM</label>
+        <label><input type="radio" name="vicios" value="NAO" required> NÃO</label>
       </div>
       <label for="viciosQuais">a) Se sim, quais:</label>
       <input type="text" id="viciosQuais" name="viciosQuais">
     </fieldset>
 
+    <!-- DECLARAÇÃO -->
     <fieldset>
       <legend>Declaração</legend>
       <p class="declaracao">
@@ -492,8 +571,15 @@
         Autorizo a consulta em bancos de dados disponíveis pela Polícia Federal, assim como outras fontes ou meios de pesquisa, para eventual verificação das informações constantes nesse documento.
       </p>
 
-      <label for="localData">Local / UF – Data do preenchimento:</label>
-      <input type="text" id="localData" name="localData" placeholder="Local / UF – Data">
+      <label for="localData" class="obrigatorio">Local / UF – Data do preenchimento:</label>
+      <input type="text" id="localData" name="localData" required>
+
+      <div class="check-group" style="margin-top:10px;">
+        <label>
+          <input type="checkbox" id="aceiteDeclaracao" name="aceiteDeclaracao" required>
+          Declaro que li e concordo com os termos acima <span style="color:#c00">*</span>
+        </label>
+      </div>
 
       <div class="assinaturas">
         <div>
@@ -520,12 +606,33 @@
     </fieldset>
 
     <div class="no-print" style="text-align:center; margin-top:20px;">
+      <button type="submit" style="padding:10px 24px; font-size:14px; cursor:pointer;">
+        ✅ Validar e imprimir
+      </button>
       <button type="button" onclick="window.print()" style="padding:10px 24px; font-size:14px; cursor:pointer;">
         🖨️ Imprimir / Salvar como PDF
       </button>
     </div>
 
   </form>
+
+  <script>
+    // Validação nativa com feedback amigável
+    document.getElementById('fichaForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const primeiroInvalido = this.querySelector(':invalid');
+      if (primeiroInvalido) {
+        primeiroInvalido.focus();
+        primeiroInvalido.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        alert('Por favor, preencha todos os campos obrigatórios marcados com * antes de continuar.');
+        return;
+      }
+
+      alert('Todos os campos obrigatórios foram preenchidos com sucesso! Você já pode imprimir ou salvar como PDF.');
+      window.print();
+    });
+  </script>
 
 </body>
 </html>
